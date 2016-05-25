@@ -12,6 +12,9 @@ module.exports = yeoman.Base.extend({
       name: 'pluginName',
       message: 'What do you want to name your plugin?'
     }, {
+      name: 'pluginDescription',
+      message: 'What does your plugin do?'
+    }, {
       name: 'pluginWebsite',
       message: 'What is the URL of the plugin\'s website?',
       validate: x => x.length > 0 ? true : 'You have to provide a website URL',
