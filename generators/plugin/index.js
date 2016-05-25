@@ -1,6 +1,5 @@
 'use strict';
 const yeoman = require('yeoman-generator');
-const chalk = require('chalk');
 const slug = require('slug');
 const normalizeUrl = require('normalize-url');
 const humanizeUrl = require('humanize-url');
@@ -11,7 +10,7 @@ module.exports = yeoman.Base.extend({
   prompting() {
     const prompts = [{
       name: 'pluginName',
-      message: 'What do you want to name your plugin?',
+      message: 'What do you want to name your plugin?'
     }, {
       name: 'pluginWebsite',
       message: 'What is the URL of the plugin\'s website?',
