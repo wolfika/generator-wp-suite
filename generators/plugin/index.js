@@ -59,6 +59,7 @@ module.exports = yeoman.Base.extend({
               replacement: '_'
             })
           },
+          description: props.pluginDescription,
           website: humanizeUrl(props.pluginWebsite),
           hasAdmin: props.hasAdmin
         };
