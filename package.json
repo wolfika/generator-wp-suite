@@ -23,6 +23,8 @@
   ],
   "dependencies": {
     "chalk": "^1.0.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-rename": "^1.2.2",
     "humanize-url": "^1.0.1",
     "normalize-url": "^1.5.2",
     "slug": "^0.9.1",

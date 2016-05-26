@@ -1,8 +1,11 @@
 'use strict';
+const path = require('path');
 const yeoman = require('yeoman-generator');
 const slug = require('slug');
 const normalizeUrl = require('normalize-url');
 const humanizeUrl = require('humanize-url');
+const filter = require('gulp-filter');
+const rename = require('gulp-rename');
 
 let _props = {};
 
@@ -71,7 +74,19 @@ module.exports = yeoman.Base.extend({
       });
   },
 
+  configuring() {
+    const templateFilter = filter('**/*', {restore: true});
+
+    this.registerTransformStream([
+      templateFilter,
+      rename(function(filePath) {
+        filePath.basename = filePath.basename.replace('plugin-name', _props.plugin.name.fileName);
+      }),
+      templateFilter.restore
+    ]);
+  },
+
   writing() {
-    this.fs.copyTpl(this.templatePath(), this.destinationPath(), _props);
+    this.fs.copyTpl(path.join(this.templatePath()), this.destinationPath(), _props);
   }
 });
