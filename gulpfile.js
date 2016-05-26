@@ -8,10 +8,14 @@ var istanbul = require('gulp-istanbul');
 var nsp = require('gulp-nsp');
 var plumber = require('gulp-plumber');
 var coveralls = require('gulp-coveralls');
+var filter = require('gulp-filter');
+
+var generatorJs = filter(['generators/**/*.js', '!generators/**/templates/**/*']);
 
 gulp.task('static', function () {
   return gulp.src('**/*.js')
     .pipe(excludeGitignore())
+    .pipe(generatorJs)
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
@@ -24,6 +28,7 @@ gulp.task('nsp', function (cb) {
 gulp.task('pre-test', function () {
   return gulp.src('generators/**/*.js')
     .pipe(excludeGitignore())
+    .pipe(generatorJs)
     .pipe(istanbul({
       includeUntested: true
     }))
@@ -46,7 +51,7 @@ gulp.task('test', ['pre-test'], function (cb) {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['generators/**/*.js', 'test/**'], ['test']);
+  gulp.watch(['generators/**/*.js', '!generators/**/templates/**/*', 'test/**'], ['test']);
 });
 
 gulp.task('coveralls', ['test'], function () {
