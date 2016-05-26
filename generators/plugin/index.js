@@ -59,15 +59,14 @@ module.exports = yeoman.Base.extend({
               replacement: '_'
             })
           },
+          author: {
+            name: props.authorName,
+            email: props.authorEmail,
+            website: humanizeUrl(props.authorWebsite)
+          },
           description: props.pluginDescription,
           website: humanizeUrl(props.pluginWebsite),
           hasAdmin: props.hasAdmin
-        };
-
-        _props.author = {
-          name: props.authorName,
-          email: props.authorEmail,
-          website: humanizeUrl(props.authorWebsite)
         };
       });
   },
