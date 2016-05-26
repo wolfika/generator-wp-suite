@@ -79,7 +79,7 @@ module.exports = yeoman.Base.extend({
 
     this.registerTransformStream([
       templateFilter,
-      rename(function(filePath) {
+      rename(filePath => {
         filePath.basename = filePath.basename.replace('plugin-name', _props.plugin.name.fileName);
       }),
       templateFilter.restore
