@@ -44,19 +44,30 @@ module.exports = yeoman.Base.extend({
 
     return this.prompt(prompts)
       .then(props => {
-        _props.pluginName = props.pluginName;
-        _props.pluginSlugKebabCase = slug(props.pluginName, {
-          lower: true
-        });
-        _props.pluginSlugSnakeCase = slug(props.pluginName, {
-          lower: false,
-          replacement: '_'
-        });
-        _props.pluginWebsite = humanizeUrl(props.pluginWebsite);
-        _props.authorName = props.authorName;
-        _props.authorEmail = props.authorEmail;
-        _props.authorWebsite = humanizeUrl(props.authorWebsite);
-        _props.hasAdmin = props.hasAdmin;
+        _props.plugin = {
+          name: {
+            human: props.pluginName,
+            fileName: slug(props.pluginName, {
+              lower: true
+            }),
+            className: slug(props.pluginName, {
+              lower: false,
+              replacement: '_'
+            }),
+            instanceName: slug(props.pluginName, {
+              lower: true,
+              replacement: '_'
+            })
+          },
+          website: humanizeUrl(props.pluginWebsite),
+          hasAdmin: props.hasAdmin
+        };
+
+        _props.author = {
+          name: props.authorName,
+          email: props.authorEmail,
+          website: humanizeUrl(props.authorWebsite)
+        };
       });
   },
 
