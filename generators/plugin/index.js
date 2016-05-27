@@ -80,19 +80,22 @@ module.exports = yeoman.Base.extend({
       });
   },
 
-  configuring() {
+  writing() {
+    const filters = [];
+
+    const adminFiles = _props.plugin.isSeparated ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
+    const publicFiles = _props.plugin.isSeparated ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
+
     const templateFilter = filter('**/*', {restore: true});
 
-    this.registerTransformStream([
-      templateFilter,
-      rename(filePath => {
-        filePath.basename = filePath.basename.replace('plugin-name', _props.plugin.name.fileName);
-      }),
-      templateFilter.restore
-    ]);
-  },
+    filters.push(templateFilter);
+    filters.push(rename(filePath => {
+      filePath.basename = filePath.basename.replace('plugin-name', _props.plugin.name.fileName);
+    }));
+    filters.push(templateFilter.restore);
 
-  writing() {
-    this.fs.copyTpl(path.join(this.templatePath()), this.destinationPath(), _props);
+    this.registerTransformStream(filters);
+
+    this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles], this.destinationPath(), _props);
   }
 });
