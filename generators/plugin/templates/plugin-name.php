@@ -28,7 +28,11 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
-}
+}<% if (plugin.usesAutoloader) { %>
+
+if ( file_exists( WP_CONTENT_DIR . '/vendor/autoload.php' ) ) {
+	require_once WP_CONTENT_DIR . '/vendor/autoload.php';
+}<% } %>
 
 /**
  * The code that runs during plugin activation.

@@ -11,9 +11,7 @@
  *
  * @package    <%= plugin.name.className %>
  * @subpackage <%= plugin.name.className %>/includes
- */<% if (plugin.usesAutoloader) { %>
-
-require_once WP_CONTENT_DIR . '/vendor/autoload.php';<% } %>
+ */
 
 /**
  * The core plugin class.
