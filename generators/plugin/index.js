@@ -39,8 +39,8 @@ module.exports = yeoman.Base.extend({
       validate: x => x.length > 0 ? true : 'You have to provide a website URL',
       filter: x => normalizeUrl(x)
     }, {
-      name: 'hasAdmin',
-      message: 'Do you need admin-specific functionality?',
+      name: 'isSeparated',
+      message: 'Separate admin and public functionality?',
       type: 'confirm',
       default: false
     }];
@@ -69,7 +69,7 @@ module.exports = yeoman.Base.extend({
           },
           description: props.pluginDescription,
           website: humanizeUrl(props.pluginWebsite),
-          hasAdmin: props.hasAdmin
+          isSeparated: props.isSeparated
         };
       });
   },
