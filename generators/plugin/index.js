@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 const yeoman = require('yeoman-generator');
-const slug = require('slug');
+const slug = require('mollusc');
 const normalizeUrl = require('normalize-url');
 const humanizeUrl = require('humanize-url');
 const filter = require('gulp-filter');
