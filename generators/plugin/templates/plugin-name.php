@@ -30,8 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }<% if (plugin.usesAutoloader) { %>
 
-if ( file_exists( WP_CONTENT_DIR . '/vendor/autoload.php' ) ) {
-	require_once WP_CONTENT_DIR . '/vendor/autoload.php';
+if ( isset ( $root_dir ) && !empty ( $root_dir ) && file_exists( $root_dir . '/vendor/autoload.php' ) ) {
+	require_once $root_dir . '/vendor/autoload.php';
 }<% } %>
 
 /**
