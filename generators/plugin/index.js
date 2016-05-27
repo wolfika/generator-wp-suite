@@ -1,5 +1,4 @@
 'use strict';
-const path = require('path');
 const yeoman = require('yeoman-generator');
 const slug = require('mollusc');
 const normalizeUrl = require('normalize-url');
