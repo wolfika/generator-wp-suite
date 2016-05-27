@@ -82,6 +82,10 @@ module.exports = yeoman.Base.extend({
   writing() {
     const filters = [];
 
+    const mv = (from, to) => {
+      this.fs.move(this.destinationPath(from), this.destinationPath(to));
+    };
+
     const adminFiles = _props.plugin.isSeparated ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
     const publicFiles = _props.plugin.isSeparated ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
 
@@ -96,5 +100,8 @@ module.exports = yeoman.Base.extend({
     this.registerTransformStream(filters);
 
     this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles], this.destinationPath(), _props);
+
+    mv('editorconfig', '.editorconfig');
+    mv('gitattributes', '.gitattributes');
   }
 });
