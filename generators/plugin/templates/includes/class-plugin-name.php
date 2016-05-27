@@ -11,7 +11,9 @@
  *
  * @package    <%= plugin.name.className %>
  * @subpackage <%= plugin.name.className %>/includes
- */
+ */<% if (plugin.usesAutoloader) { %>
+
+require_once WP_CONTENT_DIR . '/vendor/autoload.php';<% } %>
 
 /**
  * The core plugin class.
@@ -73,8 +75,9 @@ class <%= plugin.name.className %> {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_core_hooks();<% if (plugin.isSeparated) { %>
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
+		$this->define_public_hooks();<% } %>
 
 	}
 
@@ -84,9 +87,9 @@ class <%= plugin.name.className %> {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - <%= plugin.name.className %>_Loader. Orchestrates the hooks of the plugin.
-	 * - <%= plugin.name.className %>_i18n. Defines internationalization functionality.
+	 * - <%= plugin.name.className %>_i18n. Defines internationalization functionality.<% if (plugin.isSeparated) { %>
 	 * - <%= plugin.name.className %>_Admin. Defines all hooks for the admin area.
-	 * - <%= plugin.name.className %>_Public. Defines all hooks for the public side of the site.
+	 * - <%= plugin.name.className %>_Public. Defines all hooks for the public side of the site.<% } %>
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -106,7 +109,7 @@ class <%= plugin.name.className %> {
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-<%= plugin.name.fileName %>-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-<%= plugin.name.fileName %>-i18n.php';<% if (plugin.isSeparated) { %>
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -117,7 +120,7 @@ class <%= plugin.name.className %> {
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-<%= plugin.name.fileName %>-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-<%= plugin.name.fileName %>-public.php';<% } %>
 
 		$this->loader = new <%= plugin.name.className %>_Loader();
 
@@ -139,6 +142,19 @@ class <%= plugin.name.className %> {
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
+
+	/**
+	 * Register all of the hooks related to the core functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_core_hooks() {
+
+		$this->loader->add_action( 'init', $this, 'init' );
+
+	}<% if (plugin.isSeparated) { %>
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
@@ -169,6 +185,17 @@ class <%= plugin.name.className %> {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}<% } %>
+
+	/**
+	 * Example dummy function
+	 *
+	 * @since   1.0.0
+	 */
+	public function init() {
+
+		// Your code here
 
 	}
 

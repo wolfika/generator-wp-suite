@@ -43,6 +43,11 @@ module.exports = yeoman.Base.extend({
       message: 'Separate admin and public functionality?',
       type: 'confirm',
       default: false
+    }, {
+      name: 'usesAutoloader',
+      message: 'Would you like to use Composer\'s autoloader?',
+      type: 'confirm',
+      default: false
     }];
 
     return this.prompt(prompts)
@@ -69,7 +74,8 @@ module.exports = yeoman.Base.extend({
           },
           description: props.pluginDescription,
           website: humanizeUrl(props.pluginWebsite),
-          isSeparated: props.isSeparated
+          isSeparated: props.isSeparated,
+          usesAutoloader: props.usesAutoloader
         };
       });
   },
