@@ -26,8 +26,8 @@
     "gulp-filter": "^4.0.0",
     "gulp-rename": "^1.2.2",
     "humanize-url": "^1.0.1",
+    "mollusc": "^1.0.3",
     "normalize-url": "^1.5.2",
-    "slug": "^0.9.1",
     "yeoman-generator": "^0.23.0",
     "yosay": "^1.0.0"
   },
