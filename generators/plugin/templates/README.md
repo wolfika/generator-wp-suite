@@ -9,4 +9,4 @@
 2. Activate the plugin through the WordPress admin panel.
 
 ## License
-GPL-2.0+ © [<%= author.name %>](<%= author.website %>)
+GPL-2.0+ © [<%= plugin.author.name %>](<%= plugin.author.website %>)
