@@ -30,6 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }<% if (plugin.usesAutoloader) { %>
 
+// Require Composer autoloader to load all dependencies automatically.
 if ( isset ( $root_dir ) && !empty ( $root_dir ) && file_exists( $root_dir . '/vendor/autoload.php' ) ) {
 	require_once $root_dir . '/vendor/autoload.php';
 }<% } %>
