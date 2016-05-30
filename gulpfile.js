@@ -64,4 +64,10 @@ gulp.task('coveralls', ['test'], function () {
 });
 
 gulp.task('prepublish', ['nsp']);
-gulp.task('default', ['static', 'test', 'coveralls']);
+
+/**
+ * @TODO write tests for generators
+ */
+//gulp.task('default', ['static', 'test', 'coveralls']);
+
+gulp.task('default', ['static']);
