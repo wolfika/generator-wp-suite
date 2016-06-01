@@ -28,26 +28,20 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
-}<% if (plugin.usesAutoloader) { %>
-
-/**
- * Require Composer autoloader to load all dependencies automatically.
- *
- * If you're using the Roots Bedrock stack (recommended), the $root_dir
- * variabled corresponds to your project root folder. That is the place
- * where the app/, config/, and web/ folders are. It's ideal to store
- * your Composer dependencies there, in a vendor/ folder. If the $root_dir
- * variable is not exposed, it falls back to the path defined in ABSPATH,
- * which for normal WP installs is where the wp-admin/, wp-content/, and
- * wp-includes/ folders are.
- */
-if ( ( ! isset( $root_dir ) || empty( $root_dir ) ) && defined( 'ABSPATH' ) ) {
-	$root_dir = ABSPATH;
 }
 
-if ( isset ( $root_dir ) && ! empty ( $root_dir ) && file_exists( $root_dir . '/vendor/autoload.php' ) ) {
-	require_once $root_dir . '/vendor/autoload.php';
-}<% } %>
+/**
+ * Check if there's a global $root_dir variable available (exposed by Bedrock).
+ * If there isn't, define it with ABSPATH. In the end, the ROOT_DIR constant is
+ * defined with the value of the $root_dir variable.
+ */
+
+if ( ! defined( 'ROOT_DIR' ) && defined( 'ABSPATH' ) ) {
+	define( 'ROOT_DIR', ABSPATH );
+}<% if (plugin.usesAutoloader) { %>
+
+// Require Composer autoloader
+require_once ROOT_DIR . '/vendor/autoload.php';<% } %>
 
 /**
  * The code that runs during plugin activation.
