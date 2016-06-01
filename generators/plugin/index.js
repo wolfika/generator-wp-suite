@@ -103,5 +103,6 @@ module.exports = yeoman.Base.extend({
 
     mv('editorconfig', '.editorconfig');
     mv('gitattributes', '.gitattributes');
+    mv('gitignore', '.gitignore');
   }
 });
