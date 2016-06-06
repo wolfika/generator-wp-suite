@@ -30,10 +30,18 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }<% if (plugin.usesAutoloader) { %>
 
-// Require Composer autoloader to load all dependencies automatically.
-if ( isset ( $root_dir ) && !empty ( $root_dir ) && file_exists( $root_dir . '/vendor/autoload.php' ) ) {
-	require_once $root_dir . '/vendor/autoload.php';
-}<% } %>
+/**
+ * Check if there's a ROOT_DIR constant available.
+ * If there isn't, define it with ABSPATH as a fallback.
+ * This is used for several things, one of them is requiring
+ * Composer's autoloader.
+ */
+if ( ! defined( 'ROOT_DIR' ) && defined( 'ABSPATH' ) ) {
+	define( 'ROOT_DIR', ABSPATH );
+}
+
+// Require Composer autoloader
+require_once ROOT_DIR . '/vendor/autoload.php';<% } %>
 
 /**
  * The code that runs during plugin activation.
