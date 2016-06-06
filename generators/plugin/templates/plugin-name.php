@@ -28,17 +28,17 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
-}<% if (plugin.usesAutoloader) { %>
+}
 
 /**
  * Check if there's a ROOT_DIR constant available.
  * If there isn't, define it with ABSPATH as a fallback.
- * This is used for several things, one of them is requiring
+ * This is used for several things, for example requiring
  * Composer's autoloader.
  */
 if ( ! defined( 'ROOT_DIR' ) && defined( 'ABSPATH' ) ) {
 	define( 'ROOT_DIR', ABSPATH );
-}
+}<% if (plugin.usesAutoloader) { %>
 
 // Require Composer autoloader
 require_once ROOT_DIR . '/vendor/autoload.php';<% } %>

@@ -2,7 +2,6 @@
 const yeoman = require('yeoman-generator');
 const slug = require('mollusc');
 const normalizeUrl = require('normalize-url');
-const humanizeUrl = require('humanize-url');
 const filter = require('gulp-filter');
 const rename = require('gulp-rename');
 
@@ -69,10 +68,10 @@ module.exports = yeoman.Base.extend({
           author: {
             name: props.authorName,
             email: props.authorEmail,
-            website: humanizeUrl(props.authorWebsite)
+            website: props.authorWebsite
           },
           description: props.pluginDescription,
-          website: humanizeUrl(props.pluginWebsite),
+          website: props.pluginWebsite,
           isSeparated: props.isSeparated,
           usesAutoloader: props.usesAutoloader
         };
@@ -103,5 +102,6 @@ module.exports = yeoman.Base.extend({
 
     mv('editorconfig', '.editorconfig');
     mv('gitattributes', '.gitattributes');
+    mv('gitignore', '.gitignore');
   }
 });
