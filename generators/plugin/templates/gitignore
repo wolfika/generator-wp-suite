@@ -1,2 +1,6 @@
 # JetBrains IDEs
 .idea/
+
+# NPM
+node_modules
+npm-debug.log
