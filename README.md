@@ -18,6 +18,14 @@ yo wp-suite
 
 ## Generators
 
+### Theme (main)
+
+```bash
+yo wp-suite
+```
+
+*Not yet implemented.*
+
 ### Plugin
 
 ```bash
