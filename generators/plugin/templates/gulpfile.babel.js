@@ -1,10 +1,10 @@
 'use strict';
-
+<% if (plugin.isSeparated) { %>
 const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const gulp = require('gulp');
-const lazypipe = require('lazypipe');
-const makepot = require('gulp-wp-pot');
+const cssnano = require('cssnano');<% } %>
+const gulp = require('gulp');<% if (plugin.isSeparated) { %>
+const lazypipe = require('lazypipe');<% } %>
+const makepot = require('gulp-wp-pot');<% if (plugin.isSeparated) { %>
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
@@ -39,7 +39,7 @@ gulp.task('scss:public', () => {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('scss', ['scss:admin', 'scss:public']);
+gulp.task('scss', ['scss:admin', 'scss:public']);<% } %>
 
 gulp.task('i18n', () => {
   return gulp.src('./**/*.php')
@@ -55,7 +55,7 @@ gulp.task('i18n', () => {
     .pipe(gulp.dest('languages'));
 });
 
-gulp.task('default', [
-  'scss',
+gulp.task('default', [<% if (plugin.isSeparated) { %>
+  'scss',<% } %>
   'i18n'
 ]);
