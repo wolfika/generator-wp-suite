@@ -42,6 +42,11 @@ module.exports = yeoman.Base.extend({
       type: 'confirm',
       default: false
     }, {
+      name: 'usesComposer',
+      message: 'Do your plugin needs a composer.json?',
+      type: 'confirm',
+      default: false
+    }, {
       name: 'usesAutoloader',
       message: 'Would you like to use Composer\'s autoloader?',
       type: 'confirm',
@@ -73,6 +78,7 @@ module.exports = yeoman.Base.extend({
           description: props.pluginDescription,
           website: props.pluginWebsite,
           isSeparated: props.isSeparated,
+          usesComposer: props.usesComposer,
           usesAutoloader: props.usesAutoloader
         };
       });
@@ -87,7 +93,7 @@ module.exports = yeoman.Base.extend({
 
     const adminFiles = _props.plugin.isSeparated ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
     const publicFiles = _props.plugin.isSeparated ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
-    const composerFile = _props.plugin.usesAutoloader ? `${this.templatePath()}/composer.json` : `!${this.templatePath()}/composer.json`;
+    const composerFile = _props.plugin.usesComposer ? `${this.templatePath()}/composer.json` : `!${this.templatePath()}/composer.json`;
 
     const templateFilter = filter('**/*', {restore: true});
 
