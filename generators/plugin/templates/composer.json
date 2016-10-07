@@ -1,0 +1,18 @@
+{
+  "name": "<%= plugin.name.fileName %>",
+  "type": "application",
+  "description": "<%= plugin.description %>",
+  "version": "1.0.0",
+  "homepage": "<%= plugin.website %>",
+  "authors": [
+    {
+      "name": "<%= plugin.author.name %>",
+      "email": "<%= plugin.author.email %>",
+      "homepage": "<%= plugin.author.website %>",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "secure-http": false
+  }
+}

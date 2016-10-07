@@ -87,6 +87,7 @@ module.exports = yeoman.Base.extend({
 
     const adminFiles = _props.plugin.isSeparated ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
     const publicFiles = _props.plugin.isSeparated ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
+    const composerFile = _props.plugin.usesAutoloader ? `${this.templatePath()}/composer.json` : `!${this.templatePath()}/composer.json`;
 
     const templateFilter = filter('**/*', {restore: true});
 
@@ -98,7 +99,7 @@ module.exports = yeoman.Base.extend({
 
     this.registerTransformStream(filters);
 
-    this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles], this.destinationPath(), _props);
+    this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, composerFile], this.destinationPath(), _props);
 
     mv('editorconfig', '.editorconfig');
     mv('gitattributes', '.gitattributes');
