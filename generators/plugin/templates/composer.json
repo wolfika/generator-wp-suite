@@ -1,6 +1,6 @@
 {
   "name": "<%= plugin.name.fileName %>",
-  "type": "application",
+  "type": "wordpress-plugin",
   "description": "<%= plugin.description %>",
   "version": "1.0.0",
   "homepage": "<%= plugin.website %>",
@@ -11,8 +11,5 @@
       "homepage": "<%= plugin.author.website %>",
       "role": "Developer"
     }
-  ],
-  "config": {
-    "secure-http": false
-  }
+  ]
 }

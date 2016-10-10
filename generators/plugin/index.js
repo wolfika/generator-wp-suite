@@ -43,7 +43,7 @@ module.exports = yeoman.Base.extend({
       default: false
     }, {
       name: 'usesComposer',
-      message: 'Do your plugin needs a composer.json?',
+      message: 'Does your plugin needs a composer.json?',
       type: 'confirm',
       default: false
     }, {

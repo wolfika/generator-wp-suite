@@ -64,7 +64,7 @@ The plugin author's website.
 
 When developing simple plugins, I saw that most of the time, I didn't even need like 50% of the plugin boilerplate, and always started plugin development by deleting the admin and public folders, and any references to them. The generator takes away the pain of doing this manually. If you choose **yes**, the plugin is **going to** create the `admin` and `public` folders. If you choose **no**, then **it will not**.
 
-##### Do your plugin needs a composer.json?
+##### Does your plugin needs a composer.json?
 
 Maybe your plugin relies on some dependency that can be downloaded via composer. By choosing **yes** a `composer.json` will be generated.
 
