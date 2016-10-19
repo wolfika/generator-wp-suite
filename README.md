@@ -64,6 +64,10 @@ The plugin author's website.
 
 When developing simple plugins, I saw that most of the time, I didn't even need like 50% of the plugin boilerplate, and always started plugin development by deleting the admin and public folders, and any references to them. The generator takes away the pain of doing this manually. If you choose **yes**, the plugin is **going to** create the `admin` and `public` folders. If you choose **no**, then **it will not**.
 
+##### Does your plugin need a composer.json?
+
+Maybe your plugin relies on some dependency that can be downloaded via composer. By choosing **yes** a `composer.json` will be generated.
+
 ##### Would you like to use Composer's autoloader?
 
 It's generally a good idea to manage your dependencies with a dedicated dependency manager tool, [Composer] is one of those, probably the most popular for PHP-based projects today. Root's [Bedrock] stack uses Composer by default. If you choose **yes**, the plugin is going to require Composer's autoloader file in the plugin's main file (`./your-plugin-name.php`), and all your dependencies' classes are going to be available in for use in your plugin. It uses the `require_once` language construct to achieve this, making sure that the autoloader only gets included once per request. By default, it's going to look for the autoloader file in the WordPress project root directory's `vendor` folder. So, in order to have it working, you  should have a file structure like this:

@@ -1,0 +1,15 @@
+{
+  "name": "<%= plugin.name.fileName %>",
+  "type": "wordpress-plugin",
+  "description": "<%= plugin.description %>",
+  "version": "1.0.0",
+  "homepage": "<%= plugin.website %>",
+  "authors": [
+    {
+      "name": "<%= plugin.author.name %>",
+      "email": "<%= plugin.author.email %>",
+      "homepage": "<%= plugin.author.website %>",
+      "role": "Developer"
+    }
+  ]
+}
