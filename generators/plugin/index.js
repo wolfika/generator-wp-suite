@@ -4,6 +4,7 @@ const slug = require('mollusc');
 const normalizeUrl = require('normalize-url');
 const filter = require('gulp-filter');
 const rename = require('gulp-rename');
+const availableFeatures = require('./features');
 
 let _props = {};
 
@@ -37,20 +38,10 @@ module.exports = yeoman.Base.extend({
       validate: x => x.length > 0 ? true : 'You have to provide a website URL',
       filter: x => normalizeUrl(x)
     }, {
-      name: 'isSeparated',
-      message: 'Separate admin and public functionality?',
-      type: 'confirm',
-      default: false
-    }, {
-      name: 'usesComposer',
-      message: 'Does your plugin need a composer.json?',
-      type: 'confirm',
-      default: false
-    }, {
-      name: 'usesAutoloader',
-      message: 'Would you like to use Composer\'s autoloader?',
-      type: 'confirm',
-      default: false
+      name: 'featureList',
+      message: 'Please check the features you want to include in your plugin',
+      type: 'checkbox',
+      choices: availableFeatures
     }];
 
     return this.prompt(prompts)
@@ -77,9 +68,7 @@ module.exports = yeoman.Base.extend({
           },
           description: props.pluginDescription,
           website: props.pluginWebsite,
-          isSeparated: props.isSeparated,
-          usesComposer: props.usesComposer,
-          usesAutoloader: props.usesAutoloader
+          featureList: props.featureList
         };
       });
   },
@@ -91,10 +80,11 @@ module.exports = yeoman.Base.extend({
       this.fs.move(this.destinationPath(from), this.destinationPath(to));
     };
 
-    const adminFiles = _props.plugin.isSeparated ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
-    const publicFiles = _props.plugin.isSeparated ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
+    const adminFiles = _props.plugin.featureList.includes('adminFunctionality') ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
+    const publicFiles = _props.plugin.featureList.includes('publicFunctionality') ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
+    const activationFiles = _props.plugin.featureList.includes('usesActivation') ? `${this.templatePath()}/includes/*-?(de)activator.php` : `!${this.templatePath()}/includes/*-?(de)activator.php`;
     const nodeModules = `!${this.templatePath()}/node_modules/**/*`;
-    const composerFile = _props.plugin.usesComposer ? `${this.templatePath()}/composer.json` : `!${this.templatePath()}/composer.json`;
+    const composerFile = _props.plugin.featureList.includes('composer') ? `${this.templatePath()}/composer.json` : `!${this.templatePath()}/composer.json`;
 
     const templateFilter = filter('**/*', {restore: true});
 
@@ -106,7 +96,7 @@ module.exports = yeoman.Base.extend({
 
     this.registerTransformStream(filters);
 
-    this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, nodeModules, composerFile], this.destinationPath(), _props);
+    this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, activationFiles, nodeModules, composerFile], this.destinationPath(), _props);
 
     mv('editorconfig', '.editorconfig');
     mv('gitattributes', '.gitattributes');

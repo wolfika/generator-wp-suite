@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Composer-support",
+    "value": "composer"
+  },
+  {
+    "name": "Public-facing functionality",
+    "value": "publicFunctionality"
+  },
+  {
+    "name": "Admin-facing functionality",
+    "value": "adminFunctionality"
+  },
+  {
+    "name": "Activation & deactivation hook usage",
+    "value": "usesActivation"
+  }
+]
