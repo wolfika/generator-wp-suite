@@ -8,6 +8,22 @@ const availableFeatures = require('./features');
 
 let _props = {};
 
+_props.util = {};
+
+_props.util.hasAdminOrPublic = function hasAdminOrPublic() {
+  return ['adminFunctionality', 'publicFunctionality'].some(function (v) {
+    return _props.plugin.featureList.indexOf(v) >= 0;
+  });
+};
+
+_props.util.hasAdmin = function hasAdmin() {
+  return _props.plugin.featureList.indexOf('adminFunctionality') >= 0;
+};
+
+_props.util.hasPublic = function hasPublic() {
+  return _props.plugin.featureList.indexOf('publicFunctionality') >= 0;
+};
+
 module.exports = yeoman.Base.extend({
   prompting() {
     const prompts = [{
@@ -96,7 +112,11 @@ module.exports = yeoman.Base.extend({
 
     this.registerTransformStream(filters);
 
-    this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, activationFiles, nodeModules, composerFile], this.destinationPath(), _props);
+    try {
+      this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, activationFiles, nodeModules, composerFile], this.destinationPath(), _props);
+    } catch (ex) {
+      console.log(ex);
+    }
 
     mv('editorconfig', '.editorconfig');
     mv('gitattributes', '.gitattributes');
