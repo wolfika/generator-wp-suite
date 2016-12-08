@@ -28,20 +28,9 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
-}
+}<% if (plugin.featureList.includes('composer')) { %>
 
-/**
- * Check if there's a ROOT_DIR constant available.
- * If there isn't, define it with ABSPATH as a fallback.
- * This is used for several things, for example requiring
- * Composer's autoloader.
- */
-if ( ! defined( 'ROOT_DIR' ) && defined( 'ABSPATH' ) ) {
-	define( 'ROOT_DIR', ABSPATH );
-}<% if (plugin.usesAutoloader) { %>
-
-// Require Composer autoloader
-require_once ROOT_DIR . '/vendor/autoload.php';<% } %>
+require_once __DIR__ . '/vendor/autoload.php';<% } %><% if (plugin.featureList.includes('usesActivation')) { %>
 
 /**
  * The code that runs during plugin activation.
@@ -62,7 +51,7 @@ function deactivate_<%= plugin.name.instanceName %>() {
 }
 
 register_activation_hook( __FILE__, 'activate_<%= plugin.name.instanceName %>' );
-register_deactivation_hook( __FILE__, 'deactivate_<%= plugin.name.instanceName %>' );
+register_deactivation_hook( __FILE__, 'deactivate_<%= plugin.name.instanceName %>' );<% } %>
 
 /**
  * The core plugin class that is used to define internationalization,

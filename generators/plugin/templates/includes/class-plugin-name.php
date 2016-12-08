@@ -73,8 +73,8 @@ class <%= plugin.name.className %> {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_core_hooks();<% if (plugin.isSeparated) { %>
-		$this->define_admin_hooks();
+		$this->define_core_hooks();<% if (util.hasAdmin()) { %>
+		$this->define_admin_hooks();<% } %><% if (util.hasPublic()) { %>
 		$this->define_public_hooks();<% } %>
 
 	}
@@ -85,8 +85,8 @@ class <%= plugin.name.className %> {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - <%= plugin.name.className %>_Loader. Orchestrates the hooks of the plugin.
-	 * - <%= plugin.name.className %>_i18n. Defines internationalization functionality.<% if (plugin.isSeparated) { %>
-	 * - <%= plugin.name.className %>_Admin. Defines all hooks for the admin area.
+	 * - <%= plugin.name.className %>_i18n. Defines internationalization functionality.<% if (util.hasAdmin()) { %>
+	 * - <%= plugin.name.className %>_Admin. Defines all hooks for the admin area.<% } %><% if (util.hasPublic()) { %>
 	 * - <%= plugin.name.className %>_Public. Defines all hooks for the public side of the site.<% } %>
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
@@ -107,12 +107,12 @@ class <%= plugin.name.className %> {
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-<%= plugin.name.fileName %>-i18n.php';<% if (plugin.isSeparated) { %>
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-<%= plugin.name.fileName %>-i18n.php';<% if (util.hasAdmin()) { %>
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-<%= plugin.name.fileName %>-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-<%= plugin.name.fileName %>-admin.php';<% } %><% if (util.hasPublic()) { %>
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -152,7 +152,7 @@ class <%= plugin.name.className %> {
 
 		$this->loader->add_action( 'init', $this, 'init' );
 
-	}<% if (plugin.isSeparated) { %>
+	}<% if (util.hasAdmin()) { %>
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
@@ -168,7 +168,7 @@ class <%= plugin.name.className %> {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-	}
+	}<% } %><% if (util.hasPublic()) { %>
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality
