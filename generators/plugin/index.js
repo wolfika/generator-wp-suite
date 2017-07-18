@@ -1,6 +1,6 @@
 'use strict';
 const yeoman = require('yeoman-generator');
-const slug = require('mollusc');
+const slug = require('slugify');
 const normalizeUrl = require('normalize-url');
 const filter = require('gulp-filter');
 const rename = require('gulp-rename');
@@ -65,17 +65,9 @@ module.exports = yeoman.Base.extend({
         _props.plugin = {
           name: {
             human: props.pluginName,
-            fileName: slug(props.pluginName, {
-              lower: true
-            }),
-            className: slug(props.pluginName, {
-              lower: false,
-              replacement: '_'
-            }),
-            instanceName: slug(props.pluginName, {
-              lower: true,
-              replacement: '_'
-            })
+            fileName: slug(props.pluginName).toLowerCase(),
+            className: slug(props.pluginName, '_'),
+            instanceName: slug(props.pluginName, '_').toLowerCase()
           },
           author: {
             name: props.authorName,
