@@ -54,7 +54,7 @@
   },
   "repository": "git@github.com:wolfika/generator-wp-suite.git",
   "scripts": {
-    "prepublish": "gulp prepublish",
+    "prepare": "gulp prepare",
     "test": "gulp"
   },
   "license": "MIT"

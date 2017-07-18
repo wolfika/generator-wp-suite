@@ -63,7 +63,7 @@ gulp.task('coveralls', ['test'], function () {
     .pipe(coveralls());
 });
 
-gulp.task('prepublish', ['nsp']);
+gulp.task('prepare', ['nsp']);
 
 /**
  * @TODO write tests for generators
