@@ -1,6 +1,5 @@
 {
   "name": "<%= plugin.name.fileName %>",
-  "private": true,
   "version": "1.0.0",
   "description": "<%= plugin.description %>",
   "homepage": "<%= plugin.website %>",
