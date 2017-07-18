@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }<% if (plugin.featureList.includes('composer')) { %>
 
-require_once __DIR__ . '/vendor/autoload.php';<% } %><% if (plugin.featureList.includes('usesActivation')) { %>
+require_once __DIR__ . '/vendor/autoload.php';<% } %><% if (plugin.featureList.includes('activationHook')) { %>
 
 /**
  * The code that runs during plugin activation.
@@ -39,7 +39,7 @@ require_once __DIR__ . '/vendor/autoload.php';<% } %><% if (plugin.featureList.i
 function activate_<%= plugin.name.instanceName %>() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-<%= plugin.name.fileName %>-activator.php';
 	<%= plugin.name.className %>_Activator::activate();
-}
+}<% } %><% if (plugin.featureList.includes('deactivationHook')) { %>
 
 /**
  * The code that runs during plugin deactivation.
@@ -48,9 +48,10 @@ function activate_<%= plugin.name.instanceName %>() {
 function deactivate_<%= plugin.name.instanceName %>() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-<%= plugin.name.fileName %>-deactivator.php';
 	<%= plugin.name.className %>_Deactivator::deactivate();
-}
+}<% } %><% if (plugin.featureList.includes('activationHook')) { %>
 
-register_activation_hook( __FILE__, 'activate_<%= plugin.name.instanceName %>' );
+register_activation_hook( __FILE__, 'activate_<%= plugin.name.instanceName %>' );<% } %><% if (plugin.featureList.includes('deactivationHook')) { %>
+
 register_deactivation_hook( __FILE__, 'deactivate_<%= plugin.name.instanceName %>' );<% } %>
 
 /**

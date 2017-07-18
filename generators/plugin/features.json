@@ -12,7 +12,11 @@
     "value": "adminFunctionality"
   },
   {
-    "name": "Activation & deactivation hook usage",
-    "value": "usesActivation"
+    "name": "Activation hook",
+    "value": "activationHook"
+  },
+  {
+    "name": "Deactivation hook",
+    "value": "deactivationHook"
   }
 ]

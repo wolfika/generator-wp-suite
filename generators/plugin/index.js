@@ -90,7 +90,8 @@ module.exports = yeoman.Base.extend({
 
     const adminFiles = _props.plugin.featureList.includes('adminFunctionality') ? `${this.templatePath()}/admin/**/*` : `!${this.templatePath()}/admin/**/*`;
     const publicFiles = _props.plugin.featureList.includes('publicFunctionality') ? `${this.templatePath()}/public/**/*` : `!${this.templatePath()}/public/**/*`;
-    const activationFiles = _props.plugin.featureList.includes('usesActivation') ? `${this.templatePath()}/includes/*-?(de)activator.php` : `!${this.templatePath()}/includes/*-?(de)activator.php`;
+    const activationFiles = _props.plugin.featureList.includes('activationHook') ? `${this.templatePath()}/includes/*-activator.php` : `!${this.templatePath()}/includes/*-activator.php`;
+    const deactivationFiles = _props.plugin.featureList.includes('deactivationHook') ? `${this.templatePath()}/includes/*-deactivator.php` : `!${this.templatePath()}/includes/*-deactivator.php`;
     const nodeModules = `!${this.templatePath()}/node_modules/**/*`;
     const composerFile = _props.plugin.featureList.includes('composer') ? `${this.templatePath()}/composer.json` : `!${this.templatePath()}/composer.json`;
 
@@ -105,7 +106,7 @@ module.exports = yeoman.Base.extend({
     this.registerTransformStream(filters);
 
     try {
-      this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, activationFiles, nodeModules, composerFile], this.destinationPath(), _props);
+      this.fs.copyTpl([`${this.templatePath()}/**/*`, adminFiles, publicFiles, activationFiles, deactivationFiles, nodeModules, composerFile], this.destinationPath(), _props);
     } catch (ex) {
       console.log(ex);
     }
